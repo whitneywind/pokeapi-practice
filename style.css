@@ -1,18 +1,7 @@
-.hero {
-    margin-bottom: 3rem;
-}
-  
-.name-display {
-    font-size: 2rem;
-    width: 30%;
-    color: hsl(203, 92%, 42%);
-    font-weight: 600;
-}
-
 .sprite-img {
     width: clamp(3rem, 15vw, 10rem);
 }
 
-.col2-info {
-    font-size: 2rem;
+body {
+    font-family: 'Press Start 2P', cursive;
 }
