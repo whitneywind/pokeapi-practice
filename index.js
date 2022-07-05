@@ -3,12 +3,11 @@ const resultsContainer = document.querySelector('.results-container');
 const imgContainer = document.querySelector('#img-container');
 const column2 = document.querySelector('.column2');
 const card = document.querySelector('#card');
+const footer = document.querySelector('footer');
 
 async function fetchData(searchTerm) {
     let address = 'https://pokeapi.co/api/v2/pokemon/' + searchTerm;
     const response = await axios.get(address);
-
-    console.log(response.data);
 
     if (response.data.error) {
         return [];
@@ -16,8 +15,11 @@ async function fetchData(searchTerm) {
         resultsContainer.innerHTML = '';
     }
     else {
-        results.innerHTML = `${response.data.name}`;
-        console.log(response.data.types[0].type.name);
+        card.classList.remove("hidden");
+        let name = response.data.name;
+        let firstChar = name.charAt(0).toUpperCase();
+        let capName = firstChar + name.slice(1);
+        results.innerHTML = `It's ${capName}!`;
         const type = response.data.types[0].type.name;
         switch (type) {
             case "fire":
@@ -59,8 +61,8 @@ async function fetchData(searchTerm) {
             default: 
                 card.classList.add("bg-zinc-500");
         }
-        imgContainer.innerHTML = `<img class="sprite-img image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/${response.data.id}.png" />`;
-        column2.innerHTML = `<p class="col2-info">${response.data.moves[0].move.name}</p>`
+        imgContainer.innerHTML = `<img class="object-cover h-36" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/${response.data.id}.png" />`;
+        column2.innerHTML = `<p class="col2-info">Element: ${type}</p>`
         return response.data;
     }
 };
@@ -68,19 +70,33 @@ async function fetchData(searchTerm) {
 const input = document.querySelector('input');
 
 let timeoutId;
+
 const onInput = (event) => {
     if (timeoutId) {
         clearTimeout(timeoutId);
     }
     timeoutId = setTimeout(() => {
         fetchData(event.target.value);
+        event.target.value = '';
     }, 1000)
 };
 
 input.addEventListener('input', onInput);
 
+const randomPokemon = async () => {
+    let randomId = Math.round(Math.random() * (150 - 1) + 1);
+    let source = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/${randomId}.png`;
+    // let randomAddress = 'https://pokeapi.co/api/v2/pokemon/' + randomId;
+    // let randomResponse = await axios.get(randomAddress);
+    for (let i = 0; i < 5; i++) {
+        let poke = document.createElement('img');
+        poke.classList.add('h-16', 'mx-auto', 'mb-2')
+        poke.src = source;
+        footer.appendChild(poke);
+    }
+    // let randomInfo = 'https://pokeapi.co/api/v2/pokemon/';
+    // let randomResponse = await axios.get(randomInfo);
+    // console.log(randomResponse);
+}
 
-
-
-// used in initial version
-// leftImg.innerHTML = `<img src="https://source.unsplash.com/random/?${response.data.name}" />`;
+randomPokemon();

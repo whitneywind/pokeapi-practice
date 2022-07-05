@@ -43,22 +43,27 @@
     </section>
 
     <div class="container flex flex-col self-center h-5/6">
-        <div id="card" class="flex flex-col bg-red-500 w-1/2 px-5 h-2/3  min-h-fit self-center mt-10 rounded-md border-8 border-zinc-300 text-white max-w-md">
-            <label class="self-center py-5 text-center"><b>Search for your favorite Pokémon by name or id:</b></label>
-            <input type="text" class="input text-center w-1/2 min-w-fit self-center text-black" />
-            <div class="results-container">
-                <div class="columns flex flex-col bg-white text-black mt-5 items-center">
-                    <div class="column">
-                        <div class="name-display"></div>
+        <label class="self-center py-5 text-center w-5/6"><b>Search for your favorite Pokémon by name or id:</b></label>
+        <input type="text" class="input border text-center w-1/5 min-w-fit border-black self-center text-black" />
+
+        <div id="card" class="flex hidden flex-col bg-red-500 w-1/2 px-5 h-2/3  min-h-fit self-center mt-10 rounded-md border-8 border-zinc-300 text-white max-w-md">
+            
+            <div class="results-container py-3">
+                <div class="name-display text-center text-xl"></div>
+                <div class="columns flex flex-col bg-white text-black mt-5 h-4/5 items-center">
+                    <div class="column my-3">
                         <div id="img-container"></div>
                     </div>
-                    <div class="column">
+                    <div class="column my-3">
                         <div class="column2"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <footer class="flex flex-auto w-100 justify-items-end">
+
+    </footer>
     <script src="index.js"></script>
 </body>
 </html>
